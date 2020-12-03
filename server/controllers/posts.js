@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 const PostMessage = require('../models/postMessage.js')
+const express = require('express')
+
+const router = express.Router()
 
 const getPosts = async (req, res) => {
     try {
@@ -12,17 +15,17 @@ const getPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const post = req.body
+    const { title, message, selectedFile, creator, tags } = req.body
 
-    const newPost = new PostMessage(post)
+    const newPost = new PostMessage({ title, message, selectedFile, creator, tags })
 
     try {
         await newPost.save()
 
         res.status(201).json(newPost)
     } catch (error) {
-        res.status(408).json({ message: error.message })
+        res.status(409).json({ message: error.message })
     }
 }
 
-module.exports = { getPosts, createPost }
+module.exports = { getPosts, createPost, router }
