@@ -15,4 +15,12 @@ export default makeStyles(() => ({
       image: {
         marginLeft: '15px',
       },
+      [theme.breakpoints.down('sm')]: {
+        mainContainer: {
+          justifyContent: 'space-between',
+          flexDirection: 'column-reverse', 
+          alignItems: 'stretch',
+          borderSpacing: '3',
+        },
+      }
 }))
